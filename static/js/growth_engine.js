@@ -1,17 +1,12 @@
-// Глобальна змінна для збереження даних активного персонажа
+
 let currentActiveDino = null;
 
-// Функція лінійної інтерполяції
 function lerp(start, end, factor) {
   return start + (end - start) * factor;
 }
 
-// =========================================================================
-// РЕЄСТР МЕХАНІК
-// =========================================================================
 const MECHANICS = {
 
-  // 1. Механіка Капкану
   bearTrap: function(context, params = {}) {
     const { currentStage, nextStage, factor, currentLmbDmg } = context;
     const container = document.getElementById('custom-ability-container');
@@ -54,7 +49,6 @@ const MECHANICS = {
     }
   },
 
-  // 2. Універсальна механіка кутів розвороту
   tailAngle: function(context, params = {}) {
     const { currentGrowth, currentStage, nextStage, factor } = context;
     const container = document.getElementById('custom-ability-container');
@@ -133,9 +127,6 @@ const MECHANICS = {
   }
 };
 
-// =========================================================================
-// ОСНОВНИЙ РУШІЙ ОБРАХУНКУ
-// =========================================================================
 function updateDinoCard() {
   if (!currentActiveDino) return;
 
@@ -192,7 +183,6 @@ function updateDinoCard() {
   document.getElementById('armor').textContent = currentStage.armor;
   document.getElementById('atk1-cd').textContent = currentStage.atk1Cd + "с";
 
-  // Виклик механіки за її назвою та параметрами з JSON
   if (currentActiveDino.mechanic) {
     let mechanicName = typeof currentActiveDino.mechanic === 'string'
       ? currentActiveDino.mechanic
@@ -215,7 +205,6 @@ function updateDinoCard() {
   }
 }
 
-// Завантаження JSON з сервера
 function loadDinoData(jsonPath) {
   fetch(jsonPath)
     .then(response => {
@@ -239,7 +228,6 @@ function loadDinoData(jsonPath) {
     .catch(err => console.error("Помилка завантаження даних:", err));
 }
 
-// Подія перетягування повзунка
 document.addEventListener('DOMContentLoaded', () => {
   const slider = document.getElementById('growth-slider');
   if (slider) {

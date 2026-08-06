@@ -23,6 +23,5 @@ def stegosaurus():
 
 
 if __name__ == '__main__':
-    # Отримуємо порт, який виділяє Render, або 5000 за замовчуванням
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)

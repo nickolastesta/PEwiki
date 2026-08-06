@@ -1,3 +1,4 @@
+/* Сторінка */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #121212;
@@ -6,6 +7,7 @@ body {
   margin: 0;
 }
 
+/* Картка */
 .creature-card {
   max-width: 650px;
   margin: 0 auto;
@@ -15,6 +17,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* Шапка */
 .header-group {
   display: flex;
   justify-content: space-between;
@@ -24,6 +27,7 @@ body {
   margin-bottom: 20px;
 }
 
+/* Заголовок */
 h1 {
   color: #ff9800;
   margin: 0;
@@ -37,11 +41,13 @@ h1 {
   flex-shrink: 1;
 }
 
+/* Назва */
 .dino-title-text {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* Меню */
 .dino-desc-dropdown {
   display: inline-flex;
   align-items: center;
@@ -49,6 +55,7 @@ h1 {
   flex-shrink: 0;
 }
 
+/* Кнопка */
 .desc-toggle-btn {
   cursor: pointer;
   list-style: none;
@@ -61,15 +68,18 @@ h1 {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+/* Маркер */
 .desc-toggle-btn::-webkit-details-marker {
   display: none;
 }
 
+/* Анімація */
 .desc-toggle-btn:hover {
   opacity: 0.8;
   transform: scale(1.15);
 }
 
+/* Опис */
 .desc-content {
   position: absolute;
   top: 130%;
@@ -88,6 +98,7 @@ h1 {
   white-space: normal;
 }
 
+/* Підзаголовок */
 h2 {
   color: #ffb74d;
   font-size: 1.1em;
@@ -96,16 +107,19 @@ h2 {
   padding-bottom: 4px;
 }
 
+/* Список */
 ul {
   list-style: none;
   padding: 0;
 }
 
+/* Елемент */
 li {
   margin: 8px 0;
   font-size: 0.95em;
 }
 
+/* Блок */
 .stage-selector-group {
   background: #282828;
   padding: 15px;
@@ -113,22 +127,26 @@ li {
   margin-bottom: 20px;
 }
 
+/* Повзунок */
 input[type=range] {
   width: 100%;
   margin-top: 10px;
-  accent-color: #4caf50;
+  accent-color: #eb34c9;
 }
 
+/* Акцент */
 .highlight {
   color: #4caf50;
   font-weight: bold;
 }
 
+/* Значення */
 .stat-val {
   font-weight: bold;
   color: #ffffff;
 }
 
+/* Здібність */
 .ability-box {
   background: #252525;
   border-left: 4px solid #ff9800;
@@ -136,6 +154,7 @@ input[type=range] {
   margin-top: 10px;
 }
 
+/* Підказка */
 .slider-hint {
   margin: 4px 0 0 0;
   font-size: 0.7em;

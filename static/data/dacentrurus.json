@@ -1,0 +1,20 @@
+{
+  "title": "Дацентрур (<i>Dacentrurus</i>)",
+  "description": "Дацентрур — великий травоїдний стегозаврид з екосистеми <b>Крейдяного Архіпелагу</b> з класичною системою миттєвого розвороту",
+  "mechanic": {
+    "type": "tailAngle",
+    "params": {
+      "multipliers": [1.0, 1.0, 1.1, 1.25],
+      "staminaCosts": [3, 3, 6, 8],
+      "minGrowth": 43
+    }
+  },
+  "keyframes": [
+    { "progress": 0, "name": "Новонароджений", "hp": 360, "armor": 0, "weight": 22.0, "stamina": 140, "staminaRegen": 1.0, "walk": "0.3 м/с", "run": "2.6 м/с", "sprint": "3.3 м/с", "swim": "0.4 м/с", "atk1Dmg": 18, "atk1Cd": 0.5, "atk2Dmg": 40, "atk2Cd": 1.0, "atk2Cost": 4, "bleedDmg": 1, "bleedDuration": 1 },
+    { "progress": 4, "name": "Дитя", "hp": 1600, "armor": 5, "weight": 255.0, "stamina": 120, "staminaRegen": 1.0, "walk": "0.8 м/с", "run": "4.9 м/с", "sprint": "6.1 м/с", "swim": "0.5 м/с", "atk1Dmg": 50, "atk1Cd": 0.5, "atk2Dmg": 135, "atk2Cd": 1.2, "atk2Cost": 4, "bleedDmg": 5, "bleedDuration": 5 },
+    { "progress": 15, "name": "Юний", "hp": 3000, "armor": 15, "weight": 1043.0, "stamina": 95, "staminaRegen": 1.0, "walk": "1.2 м/с", "run": "7.1 м/с", "sprint": "8.9 м/с", "swim": "0.7 м/с", "atk1Dmg": 95, "atk1Cd": 0.5, "atk2Dmg": 290, "atk2Cd": 1.3, "atk2Cost": 2.5, "bleedDmg": 9, "bleedDuration": 9 },
+    { "progress": 43, "name": "Суб-дорослий", "hp": 4700, "armor": 20, "weight": 2933.0, "stamina": 75, "staminaRegen": 0.8, "walk": "2.2 м/с", "run": "6.2 м/с", "sprint": "7.8 м/с", "swim": "0.8 м/с", "atk1Dmg": 145, "atk1Cd": 0.5, "atk2Dmg": 525, "atk2Cd": 2.0, "atk2Cost": 3, "bleedDmg": 17, "bleedDuration": 17 },
+    { "progress": 75, "name": "Дорослий", "hp": 6000, "armor": 25, "weight": 5200.0, "stamina": 75, "staminaRegen": 0.6, "walk": "2.1 м/с", "run": "5.7 м/с", "sprint": "7.1 м/с", "swim": "0.8 м/с", "atk1Dmg": 180, "atk1Cd": 0.5, "atk2Dmg": 700, "atk2Cd": 2.0, "atk2Cost": 3, "bleedDmg": 25, "bleedDuration": 25 },
+    { "progress": 100, "name": "Старійшина", "hp": 7300, "armor": 30, "weight": 6921.0, "stamina": 70, "staminaRegen": 0.5, "walk": "2.5 м/с", "run": "7.0 м/с", "sprint": "9.0 м/с", "swim": "0.5 м/с", "atk1Dmg": 216, "atk1Cd": 0.5, "atk2Dmg": 840, "atk2Cd": 1.5, "atk2Cost": 3, "bleedDmg": 25, "bleedDuration": 30 }
+  ]
+}

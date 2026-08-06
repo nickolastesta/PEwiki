@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Dacentrurus - PEwiki2{% endblock %}
+
+{% block species_script %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    loadDinoData("{{ url_for('static', filename='data/dacentrurus.json') }}");
+  });
+</script>
+{% endblock %}

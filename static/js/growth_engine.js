@@ -1,4 +1,3 @@
-
 let currentActiveDino = null;
 
 function lerp(start, end, factor) {
@@ -7,6 +6,30 @@ function lerp(start, end, factor) {
 
 const MECHANICS = {
 
+  default: function(context, params = {}) {
+    const { currentStage, nextStage, factor } = context;
+    const atk2Info = document.getElementById('atk2-info');
+    const container = document.getElementById('custom-ability-container');
+
+    const dmg = Math.round(lerp(currentStage.m2.dmg, nextStage.m2.dmg, factor));
+    const cd = currentStage.m2.cd;
+    const staminaCost = currentStage.m2.staminaCost;
+    const bleedDmg = lerp(currentStage.m2.bleedDmg || 0, nextStage.m2.bleedDmg || 0, factor);
+    const bleedDuration = currentStage.m2.bleedDuration || 0;
+
+    if (atk2Info) {
+      let text = `Шкода: ${dmg} | Кулдаун: ${cd}с | Стаміна: ${staminaCost}`;
+      if (bleedDmg > 0) {
+        text += ` | Кровотеча: ${bleedDmg.toFixed(1)}/с (${bleedDuration}с)`;
+      }
+      atk2Info.textContent = text;
+    }
+
+    if (container) {
+      container.innerHTML = '';
+    }
+  },
+
   bearTrap: function(context, params = {}) {
     const { currentStage, nextStage, factor, currentLmbDmg } = context;
     const container = document.getElementById('custom-ability-container');
@@ -14,13 +37,13 @@ const MECHANICS = {
 
     const minGrowth = params.minGrowth !== undefined ? params.minGrowth : 58;
 
-    if (currentStage.hasBearTrap) {
+    if (currentStage.m2.hasBearTrap) {
       const minCharge = Math.round(currentLmbDmg * 1.25);
       const maxCharge = Math.round(currentLmbDmg * 2.3148);
-      const currentChargeBonus = (lerp(currentStage.chargeBonus || 0, nextStage.chargeBonus || 0, factor)).toFixed(1);
+      const currentChargeBonus = (lerp(currentStage.m2.chargeBonus || 0, nextStage.m2.chargeBonus || 0, factor)).toFixed(1);
 
       if (atk2Info) {
-        atk2Info.textContent = `"Капкан" (Заряджається до 10с) | Стаміна: ${currentStage.atk2Cost}`;
+        atk2Info.textContent = `"Капкан" (Заряджається до 10с) | Стаміна: ${currentStage.m2.staminaCost}`;
       }
       if (container) {
         container.innerHTML = `
@@ -32,9 +55,9 @@ const MECHANICS = {
         `;
       }
     } else {
-      const currentRmbDmg = Math.round(lerp(currentStage.atk2Dmg, nextStage.atk2Dmg, factor));
+      const currentRmbDmg = Math.round(lerp(currentStage.m2.dmg, nextStage.m2.dmg, factor));
       if (atk2Info) {
-        atk2Info.textContent = `Шкода: ${currentRmbDmg} | Кулдаун: ${currentStage.atk2Cd}с | Стаміна: ${currentStage.atk2Cost}`;
+        atk2Info.textContent = `Шкода: ${currentRmbDmg} | Кулдаун: ${currentStage.m2.cd}с | Стаміна: ${currentStage.m2.staminaCost}`;
       }
       if (container) {
         container.innerHTML = `
@@ -58,9 +81,9 @@ const MECHANICS = {
     const stCosts = params.staminaCosts || [3, 3, 6, 8];
     const minGrowth = params.minGrowth !== undefined ? params.minGrowth : 43;
 
-    const baseTailDmg = Math.round(lerp(currentStage.atk2Dmg, nextStage.atk2Dmg, factor));
-    const baseBleedRate = lerp(currentStage.bleedDmg || 0, nextStage.bleedDmg || 0, factor);
-    const bleedDuration = currentStage.bleedDuration || 0;
+    const baseTailDmg = Math.round(lerp(currentStage.m2.dmg, nextStage.m2.dmg, factor));
+    const baseBleedRate = lerp(currentStage.m2.bleedDmg || 0, nextStage.m2.bleedDmg || 0, factor);
+    const bleedDuration = currentStage.m2.bleedDuration || 0;
 
     if (currentGrowth < minGrowth) {
       if (atk2Info) {
@@ -140,36 +163,37 @@ function updateDinoCard() {
   let nextStage = currentActiveDino.keyframes[currentActiveDino.keyframes.length - 1];
 
   for (let i = 0; i < currentActiveDino.keyframes.length - 1; i++) {
-    if (val >= currentActiveDino.keyframes[i].progress && val < currentActiveDino.keyframes[i+1].progress) {
+    if (val >= currentActiveDino.keyframes[i].base.progress && val < currentActiveDino.keyframes[i+1].base.progress) {
       currentStage = currentActiveDino.keyframes[i];
       nextStage = currentActiveDino.keyframes[i+1];
       break;
     }
   }
 
-  if (val >= currentActiveDino.keyframes[currentActiveDino.keyframes.length - 1].progress) {
+  if (val >= currentActiveDino.keyframes[currentActiveDino.keyframes.length - 1].base.progress) {
     currentStage = currentActiveDino.keyframes[currentActiveDino.keyframes.length - 1];
     nextStage = currentStage;
   }
 
   let factor = 0;
-  if (nextStage.progress !== currentStage.progress) {
-    factor = (val - currentStage.progress) / (nextStage.progress - currentStage.progress);
+  if (nextStage.base.progress !== currentStage.base.progress) {
+    factor = (val - currentStage.base.progress) / (nextStage.base.progress - currentStage.base.progress);
   }
 
-  document.getElementById('stage-name').textContent = currentStage.name;
+  document.getElementById('stage-name').textContent = currentStage.base.name;
 
+  // швидкості вже числа, але лишаємо parseFloat для сумісності зі старими файлами
   const parseSpeed = (v) => typeof v === 'string' ? parseFloat(v) : v;
 
-  const currentHp = Math.round(lerp(currentStage.hp, nextStage.hp, factor));
-  const currentWeight = lerp(currentStage.weight, nextStage.weight, factor).toFixed(1);
-  const currentStamina = Math.round(lerp(currentStage.stamina, nextStage.stamina, factor));
-  const currentLmbDmg = Math.round(lerp(currentStage.atk1Dmg, nextStage.atk1Dmg, factor));
+  const currentHp = Math.round(lerp(currentStage.base.hp, nextStage.base.hp, factor));
+  const currentWeight = lerp(currentStage.base.weight, nextStage.base.weight, factor).toFixed(1);
+  const currentStamina = Math.round(lerp(currentStage.base.stamina, nextStage.base.stamina, factor));
+  const currentLmbDmg = Math.round(lerp(currentStage.m1.dmg, nextStage.m1.dmg, factor));
 
-  const currentWalk = lerp(parseSpeed(currentStage.walk), parseSpeed(nextStage.walk), factor).toFixed(1);
-  const currentRun = lerp(parseSpeed(currentStage.run), parseSpeed(nextStage.run), factor).toFixed(1);
-  const currentSprint = lerp(parseSpeed(currentStage.sprint), parseSpeed(nextStage.sprint), factor).toFixed(1);
-  const currentSwim = lerp(parseSpeed(currentStage.swim), parseSpeed(nextStage.swim), factor).toFixed(1);
+  const currentWalk = lerp(parseSpeed(currentStage.base.walk), parseSpeed(nextStage.base.walk), factor).toFixed(1);
+  const currentRun = lerp(parseSpeed(currentStage.base.run), parseSpeed(nextStage.base.run), factor).toFixed(1);
+  const currentSprint = lerp(parseSpeed(currentStage.base.sprint), parseSpeed(nextStage.base.sprint), factor).toFixed(1);
+  const currentSwim = lerp(parseSpeed(currentStage.base.swim), parseSpeed(nextStage.base.swim), factor).toFixed(1);
 
   document.getElementById('hp').textContent = currentHp;
   document.getElementById('weight').textContent = currentWeight;
@@ -180,27 +204,81 @@ function updateDinoCard() {
   document.getElementById('sprint').textContent = `${currentSprint} м/с`;
   document.getElementById('swim').textContent = `${currentSwim} м/с`;
 
-  document.getElementById('armor').textContent = currentStage.armor;
-  document.getElementById('atk1-cd').textContent = currentStage.atk1Cd + "с";
+  document.getElementById('armor').textContent = currentStage.base.armor;
+  document.getElementById('atk1-cd').textContent = currentStage.m1.cd;
+
+  // витрата стаміни основної атаки (m1) — показуємо завжди, навіть якщо 0
+  const atk1StaminaWrap = document.getElementById('atk1-stamina-wrap');
+  if (atk1StaminaWrap) {
+    const atk1StaminaCost = lerp(currentStage.m1.staminaCost || 0, nextStage.m1.staminaCost || 0, factor);
+
+    document.getElementById('atk1-stamina').textContent = atk1StaminaCost.toFixed(1).replace(/\.0$/, '');
+    atk1StaminaWrap.style.display = '';
+  }
+
+  // кровотеча основної атаки (m1)
+  const atk1BleedWrap = document.getElementById('atk1-bleed-wrap');
+  if (atk1BleedWrap) {
+    const atk1BleedDmg = lerp(currentStage.m1.bleedDmg || 0, nextStage.m1.bleedDmg || 0, factor);
+    const atk1BleedDuration = currentStage.m1.bleedDuration || 0;
+
+    if (atk1BleedDmg > 0) {
+      document.getElementById('atk1-bleed').textContent = atk1BleedDmg.toFixed(1);
+      document.getElementById('atk1-bleed-duration').textContent = atk1BleedDuration;
+      atk1BleedWrap.style.display = '';
+    } else {
+      atk1BleedWrap.style.display = 'none';
+    }
+  }
+
+  let mechanicName;
+  let params = {};
 
   if (currentActiveDino.mechanic) {
-    let mechanicName = typeof currentActiveDino.mechanic === 'string'
+    mechanicName = typeof currentActiveDino.mechanic === 'string'
       ? currentActiveDino.mechanic
       : currentActiveDino.mechanic.type;
 
-    let params = typeof currentActiveDino.mechanic === 'object'
-      ? currentActiveDino.mechanic.params
-      : {};
+    params = (typeof currentActiveDino.mechanic === 'object' && currentActiveDino.mechanic.params) || {};
+  }
 
-    if (typeof MECHANICS[mechanicName] === 'function') {
-      MECHANICS[mechanicName]({
-        val,
-        currentGrowth: val,
-        currentStage,
-        nextStage,
-        factor,
-        currentLmbDmg
-      }, params);
+  // якщо механіка не вказана, порожня ({}) або не знайдена в MECHANICS - показуємо базову інформацію по m2
+  const mechanicFn = (mechanicName && typeof MECHANICS[mechanicName] === 'function')
+    ? MECHANICS[mechanicName]
+    : MECHANICS.default;
+
+  mechanicFn({
+    val,
+    currentGrowth: val,
+    currentStage,
+    nextStage,
+    factor,
+    currentLmbDmg
+  }, params);
+
+  // третя атака (m3) - показуємо тільки якщо вона реально є (не всі нулі)
+  const atk3Info = document.getElementById('atk3-info');
+  if (atk3Info) {
+    const m3 = currentStage.m3;
+    const m3Next = nextStage.m3;
+    const hasThirdAttack = m3 && (m3.dmg > 0 || m3.cd > 0 || m3.staminaCost > 0);
+    const atk3Row = atk3Info.closest('li');
+
+    if (hasThirdAttack) {
+      const dmg = Math.round(lerp(m3.dmg, (m3Next && m3Next.dmg) ?? m3.dmg, factor));
+      const cd = m3.cd;
+      const staminaCost = m3.staminaCost;
+      const bleedDmg = lerp(m3.bleedDmg || 0, (m3Next && m3Next.bleedDmg) || 0, factor);
+      const bleedDuration = m3.bleedDuration || 0;
+
+      let text = `Шкода: ${dmg} | Кулдаун: ${cd}с | Стаміна: ${staminaCost}`;
+      if (bleedDmg > 0) {
+        text += ` | Кровотеча: ${bleedDmg.toFixed(1)}/с (${bleedDuration}с)`;
+      }
+      atk3Info.textContent = text;
+      if (atk3Row) atk3Row.style.display = '';
+    } else {
+      if (atk3Row) atk3Row.style.display = 'none';
     }
   }
 }

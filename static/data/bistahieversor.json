@@ -3,10 +3,165 @@
   "description": "Бістахієверсор — хижак середнього рівня екосистеми <b>Крейдяної Низовини</b>, який має унікальну механіку <b>Капкану</b>, що дозволяє зарядити атаку заздалегідь, щоб завдати більше шкоди потім.",
   "mechanic": "bearTrap",
   "keyframes": [
-    { "progress": 0,   "name": "Новонароджений", "hp": 160,  "armor": 0,  "weight": 1.1,    "stamina": 225, "walk": 0.5, "run": 4.0, "sprint": 5.0, "swim": 0.2, "atk1Dmg": 20,  "atk1Cd": 0.75, "atk2Dmg": 25,  "atk2Cd": 1.0, "atk2Cost": 1.5, "hasBearTrap": false, "chargeBonus": 0 },
-    { "progress": 2,   "name": "Дитя",           "hp": 940,  "armor": 0,  "weight": 67.0,   "stamina": 175, "walk": 1.4, "run": 7.1, "sprint": 8.9, "swim": 0.4, "atk1Dmg": 87,  "atk1Cd": 1.0,  "atk2Dmg": 109, "atk2Cd": 1.25, "atk2Cost": 1.5, "hasBearTrap": false, "chargeBonus": 0 },
-    { "progress": 14,  "name": "Юний",           "hp": 2100, "armor": 0,  "weight": 427.0,  "stamina": 140, "walk": 2.5, "run": 10.7, "sprint": 10.7, "swim": 0.7, "atk1Dmg": 192, "atk1Cd": 1.25, "atk2Dmg": 280, "atk2Cd": 2.0, "atk2Cost": 3.5, "hasBearTrap": false, "chargeBonus": 0 },
-    { "progress": 58,  "name": "Суб-дорослий",   "hp": 3700, "armor": 5,  "weight": 1850.0, "stamina": 95,  "walk": 4.0, "run": 9.5, "sprint": 11.0, "swim": 1.0, "atk1Dmg": 343, "atk1Cd": 1.25, "atk2Dmg": 429, "atk2Cd": 2.0, "atk2Cost": 3.0, "hasBearTrap": true,  "chargeBonus": 36.5 },
-    { "progress": 100, "name": "Дорослий",       "hp": 4900, "armor": 10, "weight": 3200.0, "stamina": 70,  "walk": 5.0, "run": 8.9, "sprint": 11.2, "swim": 1.2, "atk1Dmg": 432, "atk1Cd": 1.25, "atk2Dmg": 540, "atk2Cd": 2.0, "atk2Cost": 3.0, "hasBearTrap": true,  "chargeBonus": 46.0 }
+    {
+      "base": {
+        "name": "Новонароджений",
+        "progress": 0,
+        "hp": 160,
+        "armor": 0,
+        "weight": 1.1,
+        "stamina": 225,
+        "staminaRegen": 1,
+        "walk": 0.5,
+        "run": 4,
+        "sprint": 5,
+        "swim": 0.2
+      },
+      "m1": {
+        "dmg": 20,
+        "cd": 0.75,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 25,
+        "cd": 1,
+        "staminaCost": 1.5,
+        "bleedDmg": 0,
+        "bleedDuration": 0,
+        "hasBearTrap": false,
+        "chargeBonus": 0
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Дитя",
+        "progress": 2,
+        "hp": 940,
+        "armor": 0,
+        "weight": 67,
+        "stamina": 175,
+        "staminaRegen": 1,
+        "walk": 1.4,
+        "run": 7.1,
+        "sprint": 8.9,
+        "swim": 0.4
+      },
+      "m1": {
+        "dmg": 87,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 109,
+        "cd": 1.25,
+        "staminaCost": 1.5,
+        "bleedDmg": 0,
+        "bleedDuration": 0,
+        "hasBearTrap": false,
+        "chargeBonus": 0
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Юний",
+        "progress": 14,
+        "hp": 2100,
+        "armor": 0,
+        "weight": 427,
+        "stamina": 140,
+        "staminaRegen": 1,
+        "walk": 2.5,
+        "run": 10.7,
+        "sprint": 10.7,
+        "swim": 0.7
+      },
+      "m1": {
+        "dmg": 192,
+        "cd": 1.25,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 280,
+        "cd": 2,
+        "staminaCost": 3.5,
+        "bleedDmg": 0,
+        "bleedDuration": 0,
+        "hasBearTrap": false,
+        "chargeBonus": 0
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Суб-дорослий",
+        "progress": 58,
+        "hp": 3700,
+        "armor": 5,
+        "weight": 1850,
+        "stamina": 95,
+        "staminaRegen": 1,
+        "walk": 4,
+        "run": 9.5,
+        "sprint": 11,
+        "swim": 1
+      },
+      "m1": {
+        "dmg": 343,
+        "cd": 1.25,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 429,
+        "cd": 2,
+        "staminaCost": 3,
+        "bleedDmg": 0,
+        "bleedDuration": 0,
+        "hasBearTrap": true,
+        "chargeBonus": 36.5
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Дорослий",
+        "progress": 100,
+        "hp": 4900,
+        "armor": 10,
+        "weight": 3200,
+        "stamina": 70,
+        "staminaRegen": 1,
+        "walk": 5,
+        "run": 8.9,
+        "sprint": 11.2,
+        "swim": 1.2
+      },
+      "m1": {
+        "dmg": 432,
+        "cd": 1.25,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 540,
+        "cd": 2,
+        "staminaCost": 3,
+        "bleedDmg": 0,
+        "bleedDuration": 0,
+        "hasBearTrap": true,
+        "chargeBonus": 46
+      },
+      "m3": {}
+    }
   ]
 }

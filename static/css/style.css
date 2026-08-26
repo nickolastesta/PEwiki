@@ -137,13 +137,18 @@ input[type=range] {
 /* Акцент */
 .highlight {
   color: #4caf50;
-  font-weight: bold;
+  font-weight: normal;
 }
 
-/* Значення */
+/* Значення статів без виділення */
 .stat-val {
-  font-weight: bold;
-  color: #ffffff;
+  font-weight: normal;
+  color: inherit;
+}
+
+/* Друга атака — без жирності */
+#atk2-info {
+  font-weight: normal;
 }
 
 /* Здібність */

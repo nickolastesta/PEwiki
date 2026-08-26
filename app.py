@@ -19,7 +19,9 @@ def dacentrurus():
 def stegosaurus():
     return render_template('stegosaurus.html')
 
-
+@app.route('/allosaurus')
+def allosaurus():
+    return render_template('allosaurus.html')
 
 
 if __name__ == '__main__':

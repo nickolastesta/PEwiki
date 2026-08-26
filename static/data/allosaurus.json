@@ -1,0 +1,151 @@
+{
+  "title": "Аллозавр <i>Allosaurus </i>",
+  "description": "Аллозавр - середній хижак екосистеми <b>Юрського періоду</b>, його головна перевага це швидкість та гра зграєю",
+  "mechanic": {},
+  "keyframes": [
+    {
+      "base": {
+        "name": "Дитя",
+        "progress": 0,
+        "hp": 320,
+        "armor": 0,
+        "weight": 5,
+        "stamina": 310,
+        "staminaRegen": 0,
+        "walk": 1.1,
+        "run": 3.1,
+        "sprint": 3.9,
+        "swim": 0.4
+      },
+      "m1": {
+        "dmg": 25,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 3,
+        "bleedDuration": 5
+      },
+      "m2": {
+        "dmg": 30,
+        "cd": 2.5,
+        "staminaCost": 0,
+        "bleedDmg": 3,
+        "bleedDuration": 5
+      },
+      "m3": {
+        "dmg": 0,
+        "cd": 0,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      }
+    },
+    {
+      "base": {
+        "name": "Юний",
+        "progress": 3,
+        "hp": 1200,
+        "armor": 0,
+        "weight": 57,
+        "stamina": 240,
+        "staminaRegen": 0,
+        "walk": 2.8,
+        "run": 9.1,
+        "sprint": 11.4,
+        "swim": 1.2
+      },
+      "m1": {
+        "dmg": 110,
+        "cd": 1.25,
+        "staminaCost": 0,
+        "bleedDmg": 6,
+        "bleedDuration": 10
+      },
+      "m2": {
+        "dmg": 145,
+        "cd": 3,
+        "staminaCost": 0,
+        "bleedDmg": 8,
+        "bleedDuration": 14
+      },
+      "m3": {
+        "dmg": 0,
+        "cd": 0,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      }
+    },
+    {
+      "base": {
+        "name": "Суб-дорослий",
+        "progress": 39,
+        "hp": 2800,
+        "armor": 0,
+        "weight": 863,
+        "stamina": 170,
+        "staminaRegen": 0,
+        "walk": 4.4,
+        "run": 8.6,
+        "sprint": 10.7,
+        "swim": 0.9
+      },
+      "m1": {
+        "dmg": 195,
+        "cd": 1.25,
+        "staminaCost": 0,
+        "bleedDmg": 10,
+        "bleedDuration": 16
+      },
+      "m2": {
+        "dmg": 210,
+        "cd": 2.5,
+        "staminaCost": 0,
+        "bleedDmg": 12,
+        "bleedDuration": 24
+      },
+      "m3": {
+        "dmg": 0,
+        "cd": 0,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      }
+    },
+    {
+      "base": {
+        "name": "Дорослий",
+        "progress": 100,
+        "hp": 4200,
+        "armor": 5,
+        "weight": 2200,
+        "stamina": 130,
+        "staminaRegen": 0,
+        "walk": 4.4,
+        "run": 7.8,
+        "sprint": 9.8,
+        "swim": 1.2
+      },
+      "m1": {
+        "dmg": 320,
+        "cd": 1.25,
+        "staminaCost": 0,
+        "bleedDmg": 13,
+        "bleedDuration": 15
+      },
+      "m2": {
+        "dmg": 350,
+        "cd": 3,
+        "staminaCost": 0,
+        "bleedDmg": 15,
+        "bleedDuration": 30
+      },
+      "m3": {
+        "dmg": 0,
+        "cd": 0,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      }
+    }
+  ]
+}

@@ -4,17 +4,201 @@
   "mechanic": {
     "type": "tailAngle",
     "params": {
-      "multipliers": [1.0, 1.1, 1.1, 1.25],
-      "staminaCosts": [8, 8, 11, 13],
+      "multipliers": [
+        1,
+        1.1,
+        1.1,
+        1.25
+      ],
+      "staminaCosts": [
+        8,
+        8,
+        11,
+        13
+      ],
       "minGrowth": 43
     }
   },
   "keyframes": [
-    { "progress": 0, "name": "Новонароджений", "hp": 500, "armor": 0, "weight": 17.0, "stamina": 280, "staminaRegen": 1.0, "walk": "0.4 м/с", "run": "1.3 м/с", "sprint": "1.6 м/с", "swim": "0.2 м/с", "atk1Dmg": 5, "atk1Cd": 1.0, "atk2Dmg": 40, "atk2Cd": 2.0, "atk2Cost": 0, "bleedDmg": 0, "bleedDuration": 0 },
-    { "progress": 4, "name": "Дитя", "hp": 1600, "armor": 5, "weight": 227.0, "stamina": 230, "staminaRegen": 1.0, "walk": "1 м/с", "run": "3.3 м/с", "sprint": "4.2 м/с", "swim": "0.3 м/с", "atk1Dmg": 30, "atk1Cd": 1.0, "atk2Dmg": 175, "atk2Cd": 2.5, "atk2Cost": 0, "bleedDmg": 11, "bleedDuration": 14 },
-    { "progress": 15, "name": "Юний", "hp": 3500, "armor": 10, "weight": 1507.0, "stamina": 180, "staminaRegen": 1.0, "walk": "2.1 м/с", "run": "4.9 м/с", "sprint": "6.1 м/с", "swim": "0.5 м/с", "atk1Dmg": 70, "atk1Cd": 1.0, "atk2Dmg": 300, "atk2Cd": 3.0, "atk2Cost": 8, "bleedDmg": 16, "bleedDuration": 14 },
-    { "progress": 43, "name": "Суб-дорослий", "hp": 5500, "armor": 20, "weight": 4254.0, "stamina": 120, "staminaRegen": 0.8, "walk": "2.8 м/с", "run": "5.2 м/с", "sprint": "6.5 м/с", "swim": "0.7 м/с", "atk1Dmg": 120, "atk1Cd": 1.0, "atk2Dmg": 700, "atk2Cd": 2.85, "atk2Cost": 8, "bleedDmg": 43, "bleedDuration": 14 },
-    { "progress": 75, "name": "Дорослий", "hp": 8600, "armor": 30, "weight": 8202.0, "stamina": 110, "staminaRegen": 0.6, "walk": "2.8 м/с", "run": "4.4 м/с", "sprint": "5.6 м/с", "swim": "0.8 м/с", "atk1Dmg": 170, "atk1Cd": 1.0, "atk2Dmg": 1000, "atk2Cd": 3.0, "atk2Cost": 8, "bleedDmg": 65, "bleedDuration": 14 },
-    { "progress": 100, "name": "Старійшина", "hp": 11300, "armor": 35, "weight": 11061.0, "stamina": 100, "staminaRegen": 0.5, "walk": "2.8 м/с", "run": "4 м/с", "sprint": "5 м/с", "swim": "0.8 м/с", "atk1Dmg": 200, "atk1Cd": 1.0, "atk2Dmg": 1200, "atk2Cd": 3.4, "atk2Cost": 8, "bleedDmg": 75, "bleedDuration": 16 }
+    {
+      "base": {
+        "name": "Новонароджений",
+        "progress": 0,
+        "hp": 500,
+        "armor": 0,
+        "weight": 17,
+        "stamina": 280,
+        "staminaRegen": 1,
+        "walk": 0.4,
+        "run": 1.3,
+        "sprint": 1.6,
+        "swim": 0.2
+      },
+      "m1": {
+        "dmg": 5,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 40,
+        "cd": 2,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Дитя",
+        "progress": 4,
+        "hp": 1600,
+        "armor": 5,
+        "weight": 227,
+        "stamina": 230,
+        "staminaRegen": 1,
+        "walk": 1,
+        "run": 3.3,
+        "sprint": 4.2,
+        "swim": 0.3
+      },
+      "m1": {
+        "dmg": 30,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 175,
+        "cd": 2.5,
+        "staminaCost": 0,
+        "bleedDmg": 11,
+        "bleedDuration": 14
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Юний",
+        "progress": 15,
+        "hp": 3500,
+        "armor": 10,
+        "weight": 1507,
+        "stamina": 180,
+        "staminaRegen": 1,
+        "walk": 2.1,
+        "run": 4.9,
+        "sprint": 6.1,
+        "swim": 0.5
+      },
+      "m1": {
+        "dmg": 70,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 300,
+        "cd": 3,
+        "staminaCost": 8,
+        "bleedDmg": 16,
+        "bleedDuration": 14
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Суб-дорослий",
+        "progress": 43,
+        "hp": 5500,
+        "armor": 20,
+        "weight": 4254,
+        "stamina": 120,
+        "staminaRegen": 0.8,
+        "walk": 2.8,
+        "run": 5.2,
+        "sprint": 6.5,
+        "swim": 0.7
+      },
+      "m1": {
+        "dmg": 120,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 700,
+        "cd": 2.85,
+        "staminaCost": 8,
+        "bleedDmg": 43,
+        "bleedDuration": 14
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Дорослий",
+        "progress": 75,
+        "hp": 8600,
+        "armor": 30,
+        "weight": 8202,
+        "stamina": 110,
+        "staminaRegen": 0.6,
+        "walk": 2.8,
+        "run": 4.4,
+        "sprint": 5.6,
+        "swim": 0.8
+      },
+      "m1": {
+        "dmg": 170,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 1000,
+        "cd": 3,
+        "staminaCost": 8,
+        "bleedDmg": 65,
+        "bleedDuration": 14
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Старійшина",
+        "progress": 100,
+        "hp": 11300,
+        "armor": 35,
+        "weight": 11061,
+        "stamina": 100,
+        "staminaRegen": 0.5,
+        "walk": 2.8,
+        "run": 4,
+        "sprint": 5,
+        "swim": 0.8
+      },
+      "m1": {
+        "dmg": 200,
+        "cd": 1,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 1200,
+        "cd": 3.4,
+        "staminaCost": 8,
+        "bleedDmg": 75,
+        "bleedDuration": 16
+      },
+      "m3": {}
+    }
   ]
 }

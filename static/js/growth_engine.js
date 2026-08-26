@@ -140,7 +140,7 @@ const MECHANICS = {
         outputEl.innerHTML = `
           • <strong>Шкода від удару:</strong> <span class="stat-val">${calculatedDmg}</span> HP<br>
           • <strong>Кровотеча:</strong> <span class="stat-val">${calculatedBleed}</span> HP/сек (Тривалість: <span class="stat-val">${bleedDuration}с</span>)<br>
-          • <strong>Витрата стаміни:</strong> <span class="stat-val">${staminaCost}</span>
+          • <strong>Витрата витривалості:</strong> <span class="stat-val">${staminaCost}</span>
         `;
       }
 

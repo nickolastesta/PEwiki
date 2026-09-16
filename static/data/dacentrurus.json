@@ -13,8 +13,8 @@
       "staminaCosts": [
         3,
         3,
-        6,
-        8
+        4.5,
+        6
       ],
       "minGrowth": 43
     }
@@ -114,55 +114,25 @@
       "base": {
         "name": "Суб-дорослий",
         "progress": 43,
-        "hp": 4700,
+        "hp": 5300,
         "armor": 20,
-        "weight": 2933,
+        "weight": 3906,
         "stamina": 75,
         "staminaRegen": 0.8,
         "walk": 2.2,
-        "run": 6.2,
-        "sprint": 7.8,
+        "run": 5.8,
+        "sprint": 7.3,
         "swim": 0.8
       },
       "m1": {
-        "dmg": 145,
+        "dmg": 160,
         "cd": 0.5,
         "staminaCost": 0,
         "bleedDmg": 0,
         "bleedDuration": 0
       },
       "m2": {
-        "dmg": 525,
-        "cd": 2,
-        "staminaCost": 3,
-        "bleedDmg": 17,
-        "bleedDuration": 17
-      },
-      "m3": {}
-    },
-    {
-      "base": {
-        "name": "Дорослий",
-        "progress": 75,
-        "hp": 6000,
-        "armor": 25,
-        "weight": 5200,
-        "stamina": 75,
-        "staminaRegen": 0.6,
-        "walk": 2.1,
-        "run": 5.7,
-        "sprint": 7.1,
-        "swim": 0.8
-      },
-      "m1": {
-        "dmg": 180,
-        "cd": 0.5,
-        "staminaCost": 0,
-        "bleedDmg": 0,
-        "bleedDuration": 0
-      },
-      "m2": {
-        "dmg": 700,
+        "dmg": 600,
         "cd": 2,
         "staminaCost": 3,
         "bleedDmg": 25,
@@ -172,17 +142,17 @@
     },
     {
       "base": {
-        "name": "Старійшина",
-        "progress": 100,
-        "hp": 7300,
-        "armor": 30,
+        "name": "Дорослий",
+        "progress": 75,
+        "hp": 7200,
+        "armor": 25,
         "weight": 6921,
-        "stamina": 70,
-        "staminaRegen": 0.5,
-        "walk": 2.5,
-        "run": 7,
-        "sprint": 9,
-        "swim": 0.5
+        "stamina": 75,
+        "staminaRegen": 0.6,
+        "walk": 2.8,
+        "run": 5.1,
+        "sprint": 6.4,
+        "swim": 0.8
       },
       "m1": {
         "dmg": 216,
@@ -193,10 +163,40 @@
       },
       "m2": {
         "dmg": 840,
-        "cd": 1.5,
+        "cd": 2,
         "staminaCost": 3,
-        "bleedDmg": 25,
-        "bleedDuration": 30
+        "bleedDmg": 35,
+        "bleedDuration": 20
+      },
+      "m3": {}
+    },
+    {
+      "base": {
+        "name": "Старійшина",
+        "progress": 100,
+        "hp": 9500,
+        "armor": 30,
+        "weight": 9211,
+        "stamina": 65,
+        "staminaRegen": 0.5,
+        "walk": 2.8,
+        "run": 4.9,
+        "sprint": 6.1,
+        "swim": 0.8
+      },
+      "m1": {
+        "dmg": 252,
+        "cd": 0.5,
+        "staminaCost": 0,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 980,
+        "cd": 2.2,
+        "staminaCost": 3,
+        "bleedDmg": 43,
+        "bleedDuration": 20
       },
       "m3": {}
     }

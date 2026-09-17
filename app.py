@@ -23,6 +23,10 @@ def stegosaurus():
 def allosaurus():
     return render_template('allosaurus.html')
 
+@app.route('/iguanodong')
+def iguanod():
+    return render_template('iguanod.html')
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

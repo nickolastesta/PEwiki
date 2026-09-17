@@ -23,9 +23,9 @@ def stegosaurus():
 def allosaurus():
     return render_template('allosaurus.html')
 
-@app.route('/iguanodong')
-def iguanod():
-    return render_template('iguanod.html')
+@app.route('/iguanodon')
+def iguanodon():
+    return render_template('iguanodon.html')
 
 
 if __name__ == '__main__':

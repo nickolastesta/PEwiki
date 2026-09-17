@@ -1,4 +1,5 @@
 let currentActiveDino = null;
+let combatModeActive = false; // стан перемикача бойового режиму (зберігається між оновленнями повзунка)
 
 function lerp(start, end, factor) {
   return start + (end - start) * factor;
@@ -147,6 +148,163 @@ const MECHANICS = {
       selectEl.addEventListener('change', calculateAngleStats);
       calculateAngleStats();
     }
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // БОЙОВИЙ РЕЖИМ
+  // Очікує в кожному keyframe об'єкт "combat":
+  //   combat: {
+  //     staminaCost: number,           // витрата на активацію/підтримку режиму
+  //     walk, run, sprint, swim: number,
+  //     m1: { dmg, cd, staminaCost, bleedDmg?, bleedDuration? },
+  //     m2: { dmg, cd, staminaCost, bleedDmg?, bleedDuration? }
+  //   }
+  // params: { minGrowth: number } — ріст, з якого режим стає доступним
+  // ─────────────────────────────────────────────────────────────
+  combatMode: function(context, params = {}) {
+    const { currentGrowth, currentStage, nextStage, factor } = context;
+    const atk2Info = document.getElementById('atk2-info');
+    const container = document.getElementById('custom-ability-container');
+    const minGrowth = params.minGrowth !== undefined ? params.minGrowth : 50;
+
+    const parseSpeed = (v) => (typeof v === 'string' ? parseFloat(v) : v);
+
+    // Поки механіка не розблокована (або даних combat немає) — звичайна поведінка + підказка
+    if (currentGrowth < minGrowth || !currentStage.combat) {
+      const dmg = Math.round(lerp(currentStage.m2.dmg, nextStage.m2.dmg, factor));
+      const cd = currentStage.m2.cd;
+      const staminaCost = currentStage.m2.staminaCost;
+      const bleedDmg = lerp(currentStage.m2.bleedDmg || 0, nextStage.m2.bleedDmg || 0, factor);
+      const bleedDuration = currentStage.m2.bleedDuration || 0;
+
+      if (atk2Info) {
+        let text = `Шкода: ${dmg} | Кулдаун: ${cd}с | Стаміна: ${staminaCost}`;
+        if (bleedDmg > 0) {
+          text += ` | Кровотеча: ${bleedDmg.toFixed(1)}/с (${bleedDuration}с)`;
+        }
+        atk2Info.textContent = text;
+      }
+
+      if (container) {
+        container.innerHTML = `
+          <div class="ability-box" style="border-left-color: #888;">
+            <strong>Особливість атак:</strong><br>
+            <span style="color: #aaa; font-size: 0.9em;">
+              Механіка <strong>"Бойовий режим"</strong> відкривається з росту <strong>${minGrowth}%</strong>.
+            </span>
+          </div>
+        `;
+      }
+      combatModeActive = false;
+      return;
+    }
+
+    const cCombat = currentStage.combat;
+    const nCombat = nextStage.combat || cCombat;
+
+    const combatStaminaCost = lerp(cCombat.staminaCost || 0, nCombat.staminaCost || 0, factor);
+
+    // Бойовий набір швидкостей
+    const cbWalk = lerp(parseSpeed(cCombat.walk), parseSpeed(nCombat.walk), factor).toFixed(1);
+    const cbRun = lerp(parseSpeed(cCombat.run), parseSpeed(nCombat.run), factor).toFixed(1);
+    const cbSprint = lerp(parseSpeed(cCombat.sprint), parseSpeed(nCombat.sprint), factor).toFixed(1);
+    const cbSwim = lerp(parseSpeed(cCombat.swim), parseSpeed(nCombat.swim), factor).toFixed(1);
+
+    // Бойовий набір атак
+    const cbM1Dmg = Math.round(lerp(cCombat.m1.dmg, nCombat.m1.dmg, factor));
+    const cbM1Cd = cCombat.m1.cd;
+    const cbM1Stamina = lerp(cCombat.m1.staminaCost || 0, nCombat.m1.staminaCost || 0, factor);
+
+    const cbM2Dmg = Math.round(lerp(cCombat.m2.dmg, nCombat.m2.dmg, factor));
+    const cbM2Cd = cCombat.m2.cd;
+    const cbM2Stamina = cCombat.m2.staminaCost;
+    const cbM2BleedDmg = lerp(cCombat.m2.bleedDmg || 0, nCombat.m2.bleedDmg || 0, factor);
+    const cbM2BleedDuration = cCombat.m2.bleedDuration || 0;
+
+    // Звичайний (не бойовий) набір
+    const normWalk = lerp(parseSpeed(currentStage.base.walk), parseSpeed(nextStage.base.walk), factor).toFixed(1);
+    const normRun = lerp(parseSpeed(currentStage.base.run), parseSpeed(nextStage.base.run), factor).toFixed(1);
+    const normSprint = lerp(parseSpeed(currentStage.base.sprint), parseSpeed(nextStage.base.sprint), factor).toFixed(1);
+    const normSwim = lerp(parseSpeed(currentStage.base.swim), parseSpeed(nextStage.base.swim), factor).toFixed(1);
+    const normM1Dmg = Math.round(lerp(currentStage.m1.dmg, nextStage.m1.dmg, factor));
+    const normM1Cd = currentStage.m1.cd;
+    const normM1Stamina = lerp(currentStage.m1.staminaCost || 0, nextStage.m1.staminaCost || 0, factor);
+    const normM2Dmg = Math.round(lerp(currentStage.m2.dmg, nextStage.m2.dmg, factor));
+    const normM2Cd = currentStage.m2.cd;
+    const normM2Stamina = currentStage.m2.staminaCost;
+    const normM2BleedDmg = lerp(currentStage.m2.bleedDmg || 0, nextStage.m2.bleedDmg || 0, factor);
+    const normM2BleedDuration = currentStage.m2.bleedDuration || 0;
+
+    if (container) {
+      container.innerHTML = `
+        <div class="ability-box">
+          <strong>Бойовий режим:</strong><br>
+          <span style="font-size:0.9em; color:#ffb74d;">Витрата витривалості: <span class="stat-val">${combatStaminaCost.toFixed(1)}</span></span><br>
+          <label style="display:flex; align-items:center; gap:8px; margin-top:8px; cursor:pointer;">
+            <input type="checkbox" id="combat-mode-toggle" ${combatModeActive ? 'checked' : ''} style="width:18px; height:18px; accent-color:#ff9800; cursor:pointer;">
+            <span id="combat-toggle-label">Бойовий режим: ${combatModeActive ? 'Увімкнено' : 'Вимкнено'}</span>
+          </label>
+        </div>
+      `;
+
+      const toggleEl = document.getElementById('combat-mode-toggle');
+      const labelEl = document.getElementById('combat-toggle-label');
+
+      function applyMode() {
+        if (toggleEl.checked) {
+          document.getElementById('walk').textContent = `${cbWalk} м/с`;
+          document.getElementById('run').textContent = `${cbRun} м/с`;
+          document.getElementById('sprint').textContent = `${cbSprint} м/с`;
+          document.getElementById('swim').textContent = `${cbSwim} м/с`;
+
+          document.getElementById('atk1-dmg').textContent = cbM1Dmg;
+          document.getElementById('atk1-cd').textContent = cbM1Cd;
+
+          const atk1StaminaEl = document.getElementById('atk1-stamina');
+          if (atk1StaminaEl) {
+            atk1StaminaEl.textContent = cbM1Stamina.toFixed(1).replace(/\.0$/, '');
+          }
+
+          if (atk2Info) {
+            let text = `Шкода: ${cbM2Dmg} | Кулдаун: ${cbM2Cd}с | Стаміна: ${cbM2Stamina}`;
+            if (cbM2BleedDmg > 0) {
+              text += ` | Кровотеча: ${cbM2BleedDmg.toFixed(1)}/с (${cbM2BleedDuration}с)`;
+            }
+            atk2Info.textContent = text;
+          }
+
+          if (labelEl) labelEl.textContent = 'Бойовий режим: Увімкнено';
+        } else {
+          document.getElementById('walk').textContent = `${normWalk} м/с`;
+          document.getElementById('run').textContent = `${normRun} м/с`;
+          document.getElementById('sprint').textContent = `${normSprint} м/с`;
+          document.getElementById('swim').textContent = `${normSwim} м/с`;
+
+          document.getElementById('atk1-dmg').textContent = normM1Dmg;
+          document.getElementById('atk1-cd').textContent = normM1Cd;
+
+          const atk1StaminaEl = document.getElementById('atk1-stamina');
+          if (atk1StaminaEl) {
+            atk1StaminaEl.textContent = normM1Stamina.toFixed(1).replace(/\.0$/, '');
+          }
+
+          if (atk2Info) {
+            let text = `Шкода: ${normM2Dmg} | Кулдаун: ${normM2Cd}с | Стаміна: ${normM2Stamina}`;
+            if (normM2BleedDmg > 0) {
+              text += ` | Кровотеча: ${normM2BleedDmg.toFixed(1)}/с (${normM2BleedDuration}с)`;
+            }
+            atk2Info.textContent = text;
+          }
+
+          if (labelEl) labelEl.textContent = 'Бойовий режим: Вимкнено';
+        }
+
+        combatModeActive = toggleEl.checked;
+      }
+
+      toggleEl.addEventListener('change', applyMode);
+      applyMode();
+    }
   }
 };
 
@@ -256,7 +414,6 @@ function updateDinoCard() {
     currentLmbDmg
   }, params);
 
-  // третя атака (m3) - показуємо тільки якщо вона реально є (не всі нулі)
   const atk3Info = document.getElementById('atk3-info');
   if (atk3Info) {
     const m3 = currentStage.m3;
@@ -291,6 +448,7 @@ function loadDinoData(jsonPath) {
     })
     .then(dinoData => {
       currentActiveDino = dinoData;
+      combatModeActive = false; // скидаємо режим при завантаженні нового персонажа
 
       const desc = dinoData.description || "Опис персонажа відсутній.";
       document.getElementById('dino-title').innerHTML = `

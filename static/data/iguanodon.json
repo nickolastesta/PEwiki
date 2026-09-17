@@ -1,0 +1,64 @@
+{
+  "title": "Ігуанодон (<i>Iguanodon</i>)",
+  "description": "Ігуанодон — великий травоїдний динозавр, здатний входити в <b>Бойовий режим</b>, отримуючи інший набір швидкостей та атак.",
+  "mechanic": {
+    "type": "combatMode",
+    "params": {
+      "minGrowth": 0
+    }
+  },
+  "keyframes": [
+    {
+      "base": {
+        "name": "Старійшина",
+        "progress": 100,
+        "hp": 10500,
+        "armor": 20,
+        "weight": 10291,
+        "stamina": 60,
+        "staminaRegen": 0.5,
+        "walk": 2.1,
+        "run": 5.4,
+        "sprint": 6.8,
+        "swim": 1.9
+      },
+      "m1": {
+        "dmg": 300,
+        "cd": 1.25,
+        "staminaCost": 0.5,
+        "bleedDmg": 0,
+        "bleedDuration": 0
+      },
+      "m2": {
+        "dmg": 1000,
+        "cd": 3,
+        "recharge": 4,
+        "staminaCost": 3,
+        "bleedDmg": 12,
+        "bleedDuration": 10
+      },
+      "m3": {},
+      "combat": {
+        "staminaCost": 0.5,
+        "walk": 3.6,
+        "run": 5.4,
+        "sprint": 6.8,
+        "swim": 1.9,
+        "m1": {
+          "dmg": 666,
+          "cd": 2.5,
+          "staminaCost": 0.5,
+          "bleedDmg": 15,
+          "bleedDuration": 12
+        },
+        "m2": {
+          "dmg": 850,
+          "cd": 3,
+          "staminaCost": 4,
+          "bleedDmg": 24,
+          "bleedDuration": 15
+        }
+      }
+    }
+  ]
+}

@@ -239,7 +239,7 @@ const MECHANICS = {
       container.innerHTML = `
         <div class="ability-box">
           <strong>Бойовий режим:</strong><br>
-          <span style="font-size:0.9em; color:#ffb74d;">Витрата витривалості: <span class="stat-val">${combatStaminaCost.toFixed(1)}</span></span><br>
+          <span style="font-size:0.9em; color:#ffb74d;">Витрата витривалості: <span class="stat-val">${combatStaminaCost.toFixed(1)}/сек</span></span><br>
           <label style="display:flex; align-items:center; gap:8px; margin-top:8px; cursor:pointer;">
             <input type="checkbox" id="combat-mode-toggle" ${combatModeActive ? 'checked' : ''} style="width:18px; height:18px; accent-color:#ff9800; cursor:pointer;">
             <span id="combat-toggle-label">Бойовий режим: ${combatModeActive ? 'Увімкнено' : 'Вимкнено'}</span>
@@ -266,7 +266,7 @@ const MECHANICS = {
           }
 
           if (atk2Info) {
-            let text = `Шкода: ${cbM2Dmg} | Кулдаун: ${cbM2Cd}с | Стаміна: ${cbM2Stamina}`;
+            let text = `Шкода: ${cbM2Dmg} | Перезарядка: ${cbM2Cd}с | Витрата витривалості: ${cbM2Stamina}`;
             if (cbM2BleedDmg > 0) {
               text += ` | Кровотеча: ${cbM2BleedDmg.toFixed(1)}/с (${cbM2BleedDuration}с)`;
             }
@@ -289,7 +289,7 @@ const MECHANICS = {
           }
 
           if (atk2Info) {
-            let text = `Шкода: ${normM2Dmg} | Кулдаун: ${normM2Cd}с | Стаміна: ${normM2Stamina}`;
+            let text = `Шкода: ${normM2Dmg} | Перезарядка: ${normM2Cd}с | Витрата витривалості: ${normM2Stamina}`;
             if (normM2BleedDmg > 0) {
               text += ` | Кровотеча: ${normM2BleedDmg.toFixed(1)}/с (${normM2BleedDuration}с)`;
             }
@@ -428,7 +428,7 @@ function updateDinoCard() {
       const bleedDmg = lerp(m3.bleedDmg || 0, (m3Next && m3Next.bleedDmg) || 0, factor);
       const bleedDuration = m3.bleedDuration || 0;
 
-      let text = `Шкода: ${dmg} | Кулдаун: ${cd}с | Стаміна: ${staminaCost}`;
+      let text = `Шкода: ${dmg} | Перезарядка: ${cd}с | Витрата витривалості: ${staminaCost}`;
       if (bleedDmg > 0) {
         text += ` | Кровотеча: ${bleedDmg.toFixed(1)}/с (${bleedDuration}с)`;
       }
